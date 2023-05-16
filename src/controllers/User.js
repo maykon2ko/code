@@ -38,25 +38,24 @@ module.exports = {
       return res.status(400).json("E-mail ou senha inválidos");
     }
   },
-  async update(req, res) {
-    const user = await User.findById(req.params.id);
+  // async update(req, res) {
+  //   const user = await User.findById(req.params.id);
 
-    if (!user) {
-      return res.status(400).json("Usuário não existe!!");
-    }
-    user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
+  //   if (!user) {
+  //     return res.status(400).json("Usuário não existe!!");
+  //   }
+  //   user.name = req.body.name || user.name;
+  //   user.email = req.body.email || user.email;
 
-    try {
-      const updateUser = await user.save();
-      return res.status(201).json(updateUser);
-    } catch (error) {
-      return res.status(400).json(error);
-    }
-  },
-  async getall(req, res) {
-    const user = await User.find();
-
+  //   try {
+  //     const updateUser = await user.save();
+  //     return res.status(201).json(updateUser);
+  //   } catch (error) {
+  //     return res.status(400).json(error);
+  //   }
+  // },
+  async client(req, res) {
+    const user = await User.findById(req.user.id).select("-password");
     return res.status(200).json(user);
   },
 };
