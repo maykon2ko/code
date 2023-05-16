@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.route("/").post(userController.create);
 router.route("/login").post(userController.login);
-router.route("/:id").put(protect, userController.update);
+//router.route("/:id").put(protect, userController.update);
 router.route("/client").post(protect, userController.client);
 
 module.exports = router;

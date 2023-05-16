@@ -7,7 +7,10 @@ module.exports = {
     const userExists = await User.findOne({ email });
 
     if (userExists) {
-      return res.status(400).json("Usuário já existe!!");
+      return res.status(400).json({
+        error: true,
+        bearerToken: "Usuário já cadastrado!",
+      });
     }
     try {
       const user = await User.create({
@@ -24,7 +27,10 @@ module.exports = {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json("Usuário não existe!!");
+      return res.status(400).json({
+        error: true,
+        bearerToken: "Usuário não cadastrado!",
+      });
     }
 
     if (await user.matchPassword(password)) {
@@ -35,7 +41,10 @@ module.exports = {
         token: generateToken(user._id),
       });
     } else {
-      return res.status(400).json("E-mail ou senha inválidos");
+      return res.status(400).json({
+        error: true,
+        bearerToken: "Email e senha invalidos!",
+      });
     }
   },
   // async update(req, res) {
