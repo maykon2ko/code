@@ -16,11 +16,22 @@ const protect = async (req, res, next) => {
       if (decoded.id == req.params.id) {
         next();
       } else {
-        res.status(401).json("Não autorizado, Token inválido");
+        res.status(401).json({
+          error: true,
+          bearerToken: "Token invalido!",
+        });
       }
     } catch (error) {
-      res.status(401).json("Not authorized, no token");
+      res.status(401).json({
+        error: true,
+        bearerToken: "Token não autorizado!",
+      });
     }
+  } else {
+    res.status(401).json({
+      error: true,
+      bearerToken: null,
+    });
   }
 };
 
