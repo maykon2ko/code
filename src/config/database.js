@@ -10,7 +10,7 @@ const connectDB = async () => {
     );
     console.log(`Mongodb connected: ${conn.connection.host} 🏦`);
   } catch (error) {
-    console.error(`Eerro no mongodb: ${error.message}`);
+    console.error(`Erro no mongodb: ${error.message}`);
     process.exit(1);
   }
 };
